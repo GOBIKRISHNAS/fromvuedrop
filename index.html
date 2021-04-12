@@ -10,11 +10,18 @@
             padding-top: 10px;
             display: block;
         }
-
+        div>select{
+            width:178px;
+        }
         div>h4 {
             margin: 0;
             display: inline-block;
         }
+        label{
+            display: block;
+            margin: 20px 0 10px
+        }
+
     </style>
     <title>VUE Dropdown</title>
 </head>
@@ -22,8 +29,18 @@
 <body>
     <h1>Students Details</h1>
     <div id="app">
-        <namedropdown></namedropdown>
+        <label>Name:</label>
+        <input type="text" v-model="name" />
+        <span><b>{{ name }}</b></span>
+        <label>Age:</label>
         <agedropdown></agedropdown>
+        <label>Father name:</label>
+        <input type="text" v-model="fname" />
+        <span><b>{{ fname }}</b></span>
+        <label>Country:</label>
+        <countrydropdown></countrydropdown>
+        <label>Language:</label>
+        <languagedropdown></languagedropdown>
     </div>
 </body>
 <script src="https://unpkg.com/vue"></script>
