@@ -1,11 +1,7 @@
 <template>
   <div>
       <h2> Preview </h2>
-      <p>Name: <b>{{output.name}}</b></p>
-      <p>Age: <b>{{output.age}}</b></p>
-      <p>Father Name: <b>{{output.fname}}</b></p>
-      <p>Country: <b>{{output.country}}</b></p>
-      <p>Language: <b>{{output.language}}</b></p>
+      <p v-for= "(value, index) in output" :key="value.id">{{index}}: <b>{{value}}</b></p>
    </div>
 </template>
 
