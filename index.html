@@ -33,14 +33,14 @@
         <input type="text" v-model="name" />
         <span><b>{{ name }}</b></span>
         <label>Age:</label>
-        <agedropdown></agedropdown>
+        <dropdown :data="ages"></dropdown>
         <label>Father name:</label>
         <input type="text" v-model="fname" />
         <span><b>{{ fname }}</b></span>
         <label>Country:</label>
-        <countrydropdown></countrydropdown>
+        <dropdown :data="countries"></dropdown>
         <label>Language:</label>
-        <languagedropdown></languagedropdown>
+        <dropdown :data="languages"></dropdown>
     </div>
 </body>
 <script src="https://unpkg.com/vue"></script>
