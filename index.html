@@ -37,24 +37,17 @@
     <h1>Students Details</h1>
     <div id="app">
         <label>Name:</label>
-        <input type="text" v-model="name" v-on:change="updateData('name', output, name)" />
+        <textfield  :keys="name" :outputs="output"></textfield>
         <label>Age:</label>
         <dropdown :data="ages" :keys="age" :outputs="output"></dropdown>
         <label>Father name:</label>
-        <input type="text" v-model="fname"  v-on:change="updateData('fname', output, fname)"/>
+        <textfield  :keys="fname" :outputs="output"></textfield>
         <label>Country:</label>
         <dropdown :data="countries" :keys="country" :outputs="output"></dropdown>
         <label>Language:</label>
         <dropdown :data="languages" :keys="language" :outputs="output"></dropdown>
         <button type="submit" v-on:click="submit=!submit">Submit</button>
-        <div v-if="submit" :outputs="output">
-            <h2> Preview </h2>
-            <p>Name: <b>{{output.name}}</b></p>
-            <p>Age: <b>{{output.age}}</b></p>
-            <p>Father Name: <b>{{output.fname}}</b></p>
-            <p>Country: <b>{{output.country}}</b></p>
-            <p>Language: <b>{{output.language}}</b></p>
-        </div>
+        <submitbutton :submit="submit" v-if="submit" :outputs="output"></submitbutton>
     </div>
 </body>
 <script src="https://unpkg.com/vue"></script>
