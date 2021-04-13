@@ -10,18 +10,25 @@
             padding-top: 10px;
             display: block;
         }
-        div>select{
-            width:178px;
+
+        div>select {
+            width: 178px;
         }
+
         div>h4 {
             margin: 0;
             display: inline-block;
         }
-        label{
+
+        label {
             display: block;
-            margin: 20px 0 10px
+            margin: 10px 0 10px
         }
 
+        button {
+            display: block;
+            margin: 10px 0 10px;
+        }
     </style>
     <title>VUE Dropdown</title>
 </head>
@@ -30,17 +37,24 @@
     <h1>Students Details</h1>
     <div id="app">
         <label>Name:</label>
-        <input type="text" v-model="name" />
-        <span><b>{{ name }}</b></span>
+        <input type="text" v-model="name" v-on:change="updateData('name', output, name)" />
         <label>Age:</label>
-        <dropdown :data="ages"></dropdown>
+        <dropdown :data="ages" :keys="age" :outputs="output"></dropdown>
         <label>Father name:</label>
-        <input type="text" v-model="fname" />
-        <span><b>{{ fname }}</b></span>
+        <input type="text" v-model="fname"  v-on:change="updateData('fname', output, fname)"/>
         <label>Country:</label>
-        <dropdown :data="countries"></dropdown>
+        <dropdown :data="countries" :keys="country" :outputs="output"></dropdown>
         <label>Language:</label>
-        <dropdown :data="languages"></dropdown>
+        <dropdown :data="languages" :keys="language" :outputs="output"></dropdown>
+        <button type="submit" v-on:click="submit=!submit">Submit</button>
+        <div v-if="submit" :outputs="output">
+            <h2> Preview </h2>
+            <p>Name: <b>{{output.name}}</b></p>
+            <p>Age: <b>{{output.age}}</b></p>
+            <p>Father Name: <b>{{output.fname}}</b></p>
+            <p>Country: <b>{{output.country}}</b></p>
+            <p>Language: <b>{{output.language}}</b></p>
+        </div>
     </div>
 </body>
 <script src="https://unpkg.com/vue"></script>

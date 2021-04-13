@@ -1,20 +1,25 @@
 Vue.component('dropdown', {
    template: `
-    <div>
-        <select v-model="dataName">
+        <select v-model="dataName" v-on:change= "updateData(key, output, dataName)">
             <option v-for="data in dropData" :value="data">{{data}}</option>
         </select>
-        <h4 v-if="dataName">{{dataName}}</h4>
-    </div>
 `,
-   props: ['data', 'country'],
+   props: ['data', "keys", "outputs"],
    data: function () {
       return {
          "dropData": this.data,
+         "key": this.keys,
+         "output": this.outputs,
          "dataName": ""
+      }
+   },
+   methods: {
+      updateData: function (key, output, dataName) {
+         output[key] = dataName;
       }
    }
 });
+
 
 
 new Vue({
@@ -22,6 +27,12 @@ new Vue({
    data: {
       "name": "",
       "fname": "",
+      "age": "age",
+      "language": "language",
+      "country": "country",
+      "dataName": "",
+      "submit": false,
+      "output": { "age": "", "language": "", "country": "", "name": "" },
       "ages": ["0", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
          26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
          50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
@@ -32,8 +43,13 @@ new Vue({
          "Mexico", "Brazil", "Philippines", "United States", "Brazil", "Indonesia", "Greece", "Japan", "Indonesia", "Denmark", "Philippines",
          "Ukraine", "Russia", "Indonesia", "Philippines", "China", "Poland", "Thailand", "Indonesia", "Russia", "Croatia", "Swaziland", "Kenya", "Indonesia",
          "Poland", "Nigeria", "Indonesia", "Indonesia", "Brazil"],
-         
+
       "languages": ["Georgian", "Bosnian", "Norwegian", "Nepali", "Pashto", "Swati", "Kazakh", "Dutch", "Croatian", "Catalan", "Khmer",
          "Maltese", "Indonesian", "Assamese", "Marathi", "Thai", "Kashmiri", "Nepali", "Georgian"]
+   },
+   methods: {
+      updateData: function (key, output, dataName) {
+         output[key] = dataName;
+      }
    }
 });
