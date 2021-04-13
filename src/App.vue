@@ -1,68 +1,25 @@
-Vue.component('textfield', {
-   template: `
-        <input type="text" v-model="dataName" v-on:change="updateData(key, output, dataName)" />
-   `,
-   props: ["keys", "outputs"],
-   data: function () {
-      return {
-         "key": this.keys,
-         "output": this.outputs,
-         "dataName": ""
-      }
-   },
-   methods: {
-      updateData: function (key, output, dataName) {
-         output[key] = dataName;
-      }
-   }
-})
+<template>
+  <div id="app">
+    <label>Name:</label>
+    <textfield :keys="name" :outputs="output"></textfield>
+    <label>Age:</label>
+    <dropdown :data="ages" :keys="age" :outputs="output"></dropdown>
+    <label>Father name:</label>
+    <textfield :keys="fname" :outputs="output"></textfield>
+    <label>Country:</label>
+    <dropdown :data="countries" :keys="country" :outputs="output"></dropdown>
+    <label>Language:</label>
+    <dropdown :data="languages" :keys="language" :outputs="output"></dropdown>
+    <button type="submit" v-on:click="submit = !submit">Submit</button>
+    <submitbutton :submit="submit" v-if="submit" :outputs="output"></submitbutton>
+  </div>
+</template>
 
-Vue.component('dropdown', {
-   template: `
-        <select v-model="dataName" v-on:change= "updateData(key, output, dataName)">
-            <option v-for="data in dropData" :value="data">{{data}}</option>
-        </select>
-`,
-   props: ['data', "keys", "outputs"],
-   data: function () {
-      return {
-         "dropData": this.data,
-         "key": this.keys,
-         "output": this.outputs,
-         "dataName": ""
-      }
-   },
-   methods: {
-      updateData: function (key, output, dataName) {
-         output[key] = dataName;
-      }
-   }
-});
-
-Vue.component('submitbutton', {
-   template: `
-   <div>
-      <h2> Preview </h2>
-      <p>Name: <b>{{output.name}}</b></p>
-      <p>Age: <b>{{output.age}}</b></p>
-      <p>Father Name: <b>{{output.fname}}</b></p>
-      <p>Country: <b>{{output.country}}</b></p>
-      <p>Language: <b>{{output.language}}</b></p>
-   </div>
-   `,
-   props: ["submit", "outputs"],
-   data: function () {
-      return {
-         "submits": this.submit,
-         "output": this.outputs
-      }
-   }
-})
-
-
-new Vue({
-   el: '#app',
-   data: {
+<script>
+export default {
+  name: "app",
+  data() {
+    return {
       "name": "",
       "fname": "",
       "name": "name",
@@ -86,10 +43,38 @@ new Vue({
 
       "languages": ["Georgian", "Bosnian", "Norwegian", "Nepali", "Pashto", "Swati", "Kazakh", "Dutch", "Croatian", "Catalan", "Khmer",
          "Maltese", "Indonesian", "Assamese", "Marathi", "Thai", "Kashmiri", "Nepali", "Georgian"]
-   },
-   methods: {
-      updateData: function (key, output, dataName) {
+   };
+  },
+  methods: {
+    updateData: function (key, output, dataName) {
          output[key] = dataName;
       }
-   }
-});
+  }
+};
+</script>
+
+<style>
+#app > div {
+  padding-top: 10px;
+  display: block;
+}
+
+div > select {
+  width: 178px;
+}
+
+div > h4 {
+  margin: 0;
+  display: inline-block;
+}
+
+label {
+  display: block;
+  margin: 10px 0 10px;
+}
+
+button {
+  display: block;
+  margin: 10px 0 10px;
+}
+</style>
