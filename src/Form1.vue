@@ -1,5 +1,6 @@
 <template>
   <div id="form1">
+    <div>
     <label>Name:</label>
     <textfield :keys="name" :outputs="output"></textfield>
     <label>Age:</label>
@@ -11,6 +12,7 @@
     <label>Language:</label>
     <dropdown :data="languages" :keys="language" :outputs="output"></dropdown>
     <button type="submit" v-on:click="submit = !submit">Submit</button>
+    </div>
     <submitbutton :submit="submit" v-if="submit" :outputs="output"></submitbutton>
   </div>
 </template>
@@ -53,14 +55,12 @@ export default {
 
 <style>
 body{
-  max-width: 800px;
-  margin: auto;
-  margin-left: 450px;
-  background: white;
-  padding: 10px;
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
 }
-#form1 > div {
-  padding-top: 10px;
+#form1{
+  padding-left: 20px;
   display: block;
 }
 
@@ -68,24 +68,28 @@ div > select {
   width: 178px;
 }
 
-div > h4 {
-  margin: 0;
-  display: inline-block;
-}
-
-label {
-  display: block;
-  margin: 10px 0 10px;
+div > h1 {
+  padding-left: 20px;
+  margin: 10px auto 0 0;
 }
 
 button {
   display: block;
-  margin: 10px 0 10px;
+  margin: 10px 0 10px 22px;
+}
+
+div>p, div>h2 {
+   text-align: left;
+   padding-left: 50px;
 }
 
 #formrow1 {
   display: inline-block;
-  padding-right: 80px;
-  vertical-align: top
+  margin: 30px auto;
+  width: 300px;
+  vertical-align: top;
+  border: 2px solid seagreen;
+  background-color: aquamarine;
 }
+
 </style>

@@ -46,8 +46,13 @@ export default {
 </script>
 
 <style>
-#form1 > div {
-  padding-top: 10px;
+body{
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+#form2{
+  padding-left: 10px;
   display: block;
 }
 
@@ -55,23 +60,38 @@ div > select {
   width: 178px;
 }
 
-div > h4 {
-  margin: 0;
-  display: inline-block;
+div > h1 {
+  padding-left: 20px;
+  margin: 10px auto 0 0;
 }
 
 label {
   display: block;
+  padding-left: 20px;
+  text-align: left;
   margin: 10px 0 10px;
+}
+
+input, select{
+  margin-left:-60px;
 }
 
 button {
   display: block;
-  margin: 10px 0 10px;
+  margin: 10px 0 10px 22px;
+}
+
+div>p, div>h2 {
+   text-align: left;
+   padding-left: 20px;
 }
 
 #formrow2 {
   display: inline-block;
-  vertical-align: top
+  margin: 30px auto;
+  width: 300px;
+  vertical-align: top;
+  border: 2px solid seagreen;
+  background-color: aquamarine;
 }
 </style>
