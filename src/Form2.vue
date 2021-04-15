@@ -2,8 +2,7 @@
   <div id="form1">
     <div class="field">
       <label>Item Name</label>
-      <textfield :keys="itemname" :outputs="output"></textfield>
-      <span v-if="!errors['Item Name']">Item Name is required</span>
+      <textfield :keys="itemname" :outputs="output" :errors="errors"></textfield>
     </div>
     <div class="field">
       <label>Category</label>
@@ -11,8 +10,8 @@
         :data="categories"
         :keys="itemcategory"
         :outputs="output"
+        :errors="errors"
       ></dropdown>
-      <span v-if="!errors.Category">Category is required</span>
     </div>
     <div class="field">
       <label>Quantity</label>
@@ -20,13 +19,12 @@
         :data="quantities"
         :keys="quantity"
         :outputs="output"
+        :errors="errors"
       ></dropdown>
-      <span v-if="!errors.Quantity">Quantity is required</span>
     </div>
     <div class="field">
       <label>Price</label>
-      <textfield :keys="price" :outputs="output"></textfield>
-      <span v-if="!errors.Price">Price is required</span>
+      <textfield :keys="price" :outputs="output" :errors="errors"></textfield>
     </div>
     <div class="field">
       <label>Currency</label>
@@ -34,8 +32,8 @@
         :data="currencies"
         :keys="currency"
         :outputs="output"
+        :errors="errors"
       ></dropdown>
-      <span v-if="!errors.Currency">Currency is required</span>
     </div>
     <button type="submit" v-on:click="validateForm()">Submit</button>
     <submitbutton

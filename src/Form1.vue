@@ -3,18 +3,15 @@
     <div>
       <div class="field">
         <label>Name</label>
-        <textfield :keys="name" :outputs="output"></textfield>
-        <span v-if="!errors.Name">Name is required</span>
+        <textfield :keys="name" :outputs="output" :errors="errors"></textfield>
       </div>
       <div class="field">
         <label>Age</label>
-        <dropdown :data="ages" :keys="age" :outputs="output"></dropdown>
-        <span v-if="!errors.Age">Age is required</span>
+        <dropdown :data="ages" :keys="age" :outputs="output" :errors="errors"></dropdown>
       </div>
       <div class="field">
         <label>Father name</label>
-        <textfield :keys="fname" :outputs="output"></textfield>
-        <span v-if="!errors['Father Name']">Father Name is required</span>
+        <textfield :keys="fname" :outputs="output" :errors="errors"></textfield>
       </div>
       <div class="field">
         <label>Country</label>
@@ -22,8 +19,8 @@
           :data="countries"
           :keys="country"
           :outputs="output"
+          :errors="errors"
         ></dropdown>
-        <span v-if="!errors.Country">Country is required</span>
       </div>
       <div class="field">
         <label>Language</label>
@@ -31,8 +28,8 @@
           :data="languages"
           :keys="language"
           :outputs="output"
+          :errors="errors"
         ></dropdown>
-        <span v-if="!errors.Language">Language is required</span>
       </div>
       <button type="submit" v-on:click="validateForm()">Submit</button>
     </div>
