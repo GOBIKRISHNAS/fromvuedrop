@@ -1,27 +1,48 @@
 <template>
   <div id="form1">
     <div class="field">
-    <label>Item Name</label>
-    <textfield :keys="itemname" :outputs="output"></textfield>
+      <label>Item Name</label>
+      <textfield :keys="itemname" :outputs="output"></textfield>
+      <span v-if="!errors['Item Name']">Item Name is required</span>
     </div>
     <div class="field">
-    <label>Category</label>
-    <dropdown :data="categories" :keys="itemcategory" :outputs="output"></dropdown>
+      <label>Category</label>
+      <dropdown
+        :data="categories"
+        :keys="itemcategory"
+        :outputs="output"
+      ></dropdown>
+      <span v-if="!errors.Category">Category is required</span>
     </div>
     <div class="field">
-    <label>Quantity</label>
-    <dropdown :data="quantities" :keys="quantity" :outputs="output"></dropdown>
+      <label>Quantity</label>
+      <dropdown
+        :data="quantities"
+        :keys="quantity"
+        :outputs="output"
+      ></dropdown>
+      <span v-if="!errors.Quantity">Quantity is required</span>
     </div>
     <div class="field">
-    <label>Price</label>
-    <textfield :keys="price" :outputs="output"></textfield>
+      <label>Price</label>
+      <textfield :keys="price" :outputs="output"></textfield>
+      <span v-if="!errors.Price">Price is required</span>
     </div>
     <div class="field">
-    <label>Currency</label>
-    <dropdown :data="currencies" :keys="currency" :outputs="output"></dropdown>
+      <label>Currency</label>
+      <dropdown
+        :data="currencies"
+        :keys="currency"
+        :outputs="output"
+      ></dropdown>
+      <span v-if="!errors.Currency">Currency is required</span>
     </div>
-    <button type="submit" v-on:click="submit = !submit">Submit</button>
-    <submitbutton :submit="submit" v-if="submit" :outputs="output"></submitbutton>
+    <button type="submit" v-on:click="validateForm()">Submit</button>
+    <submitbutton
+      :submit="submit"
+      v-if="submit"
+      :outputs="output"
+    ></submitbutton>
   </div>
 </template>
 
@@ -30,28 +51,164 @@ export default {
   name: "form2",
   data() {
     return {
-      "itemname": "Item Name",
-      "price": "Price",
-      "quantity": "Quantity",
-      "currency": "Currency",
-      "itemcategory": "Category",
-      "dataName": "",
-      "submit": false,
-      "output": {"Item Name": "", "Category": "", "Quantity": "", "Price": "", "Currency": "" },
-      "quantities": ["0", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
-         26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-         50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
-         74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95,
-         96, 97, 98, 99],
-      "categories": ["Fruits", "Vegetables", "Deserts", "Fast Foods", "Raw Materials", "Continental", "Spices"],
-      "currencies": ["INR", "SAR", "EUR", "USD", "CNY"]
-   };
+      itemname: "Item Name",
+      price: "Price",
+      quantity: "Quantity",
+      currency: "Currency",
+      itemcategory: "Category",
+      dataName: "",
+      submit: false,
+      output: {
+        "Item Name": "",
+        Category: "",
+        Quantity: "",
+        Price: "",
+        Currency: "",
+      },
+      errors: {
+        "Item Name": true,
+        Category: true,
+        Quantity: true,
+        Price: true,
+        Currency: true,
+      },
+      quantities: [
+        "0",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+      ],
+      categories: [
+        "Fruits",
+        "Vegetables",
+        "Deserts",
+        "Fast Foods",
+        "Raw Materials",
+        "Continental",
+        "Spices",
+      ],
+      currencies: ["INR", "SAR", "EUR", "USD", "CNY"],
+    };
   },
   methods: {
     updateData: function (key, output, dataName) {
-         output[key] = dataName;
+      output[key] = dataName;
+    },
+    validateForm: function () {
+      var flag = 0;
+      for (var key in this.output) {
+        if (this.output.hasOwnProperty(key)) {
+          console.log(this.output[key]);
+          if (this.output[key] == "") {
+            console.log(false);
+            this.errors[key] = false;
+          } else {
+            this.errors[key] = true;
+            flag = flag + 1;
+          }
+        }
       }
-  }
+      if (flag == 5) {
+        this.submit = true;
+      }
+    },
+  },
 };
 </script>
 
@@ -59,10 +216,10 @@ export default {
 body {
   margin: 0 auto;
   text-align: center;
-  background:    url('https://completeprojectresource.com/wp-content/uploads/2018/03/contact-us-form-background.jpg');
-  background-size:     cover;                     
-  background-repeat:   no-repeat;
-  background-position: center center;     
+  background: url("https://completeprojectresource.com/wp-content/uploads/2018/03/contact-us-form-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 #form2 {
   padding-left: 20px;
@@ -70,7 +227,7 @@ body {
 }
 
 div > select {
-  width: 260px;
+  width: 290px;
 }
 
 div > h1 {
@@ -109,13 +266,13 @@ div > h2 {
 #formrow2 {
   display: inline-block;
   margin: 80px auto;
-  width: 330px;
+  width: 350px;
   vertical-align: top;
   background: white;
   border-radius: 10px;
 }
 
-.field{
+.field {
   background: white;
   margin-right: 20px;
   margin-bottom: 10px;
@@ -123,8 +280,9 @@ div > h2 {
   border-radius: 5px;
 }
 
-input, select{
-  width: 260px;
+input,
+select {
+  width: 290px;
   background-color: transparent;
   outline: none;
   outline-style: none;

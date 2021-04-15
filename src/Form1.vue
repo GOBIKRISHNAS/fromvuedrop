@@ -4,24 +4,37 @@
       <div class="field">
         <label>Name</label>
         <textfield :keys="name" :outputs="output"></textfield>
+        <span v-if="!errors.Name">Name is required</span>
       </div>
       <div class="field">
-      <label>Age</label>
-      <dropdown :data="ages" :keys="age" :outputs="output"></dropdown>
+        <label>Age</label>
+        <dropdown :data="ages" :keys="age" :outputs="output"></dropdown>
+        <span v-if="!errors.Age">Age is required</span>
       </div>
       <div class="field">
-      <label>Father name</label>
-      <textfield :keys="fname" :outputs="output"></textfield>
+        <label>Father name</label>
+        <textfield :keys="fname" :outputs="output"></textfield>
+        <span v-if="!errors['Father Name']">Father Name is required</span>
       </div>
       <div class="field">
-      <label>Country</label>
-      <dropdown :data="countries" :keys="country" :outputs="output"></dropdown>
+        <label>Country</label>
+        <dropdown
+          :data="countries"
+          :keys="country"
+          :outputs="output"
+        ></dropdown>
+        <span v-if="!errors.Country">Country is required</span>
       </div>
       <div class="field">
-      <label>Language</label>
-      <dropdown :data="languages" :keys="language" :outputs="output"></dropdown>
+        <label>Language</label>
+        <dropdown
+          :data="languages"
+          :keys="language"
+          :outputs="output"
+        ></dropdown>
+        <span v-if="!errors.Language">Language is required</span>
       </div>
-      <button type="submit" v-on:click="submit = !submit">Submit</button>
+      <button type="submit" v-on:click="validateForm()">Submit</button>
     </div>
     <submitbutton
       :submit="submit"
@@ -49,6 +62,13 @@ export default {
         "Father Name": "",
         Country: "",
         Language: "",
+      },
+      errors: {
+        Name: true,
+        Age: true,
+        "Father Name": true,
+        Country: true,
+        Language: true,
       },
       ages: [
         "0",
@@ -232,7 +252,24 @@ export default {
     updateData: function (key, output, dataName) {
       output[key] = dataName;
     },
-  },
+    validateForm: function () {
+      var flag = 0;
+      for (var key in this.output) {
+        if (this.output.hasOwnProperty(key)) {
+          console.log(this.output[key]);
+          if(this.output[key]== ""){
+            console.log(false)
+            this.errors[key] = false;
+          }
+          else{
+            this.errors[key] = true;
+            flag = flag + 1;
+          }
+        }
+      }
+      if(flag == 5){this.submit = true;}
+    }
+  }
 };
 </script>
 
@@ -276,18 +313,25 @@ div > h2 {
 #formrow1 {
   display: inline-block;
   margin: 80px auto;
-  margin-right:250px;
-  width: 320px;
+  margin-right: 250px;
+  width: 350px;
   vertical-align: top;
   background: white;
   border-radius: 10px;
 }
 
-.field{
+.field {
   background: white;
   padding: 10px;
   margin-right: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+span {
+  color: #b94a48;
+  font-weight: bold;
+  display: block;
+  padding-left: 0px;
+  text-align: left;
 }
 </style>
