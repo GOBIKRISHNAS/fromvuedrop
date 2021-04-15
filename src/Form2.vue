@@ -1,15 +1,25 @@
 <template>
   <div id="form1">
-    <label>Item Name:</label>
+    <div class="field">
+    <label>Item Name</label>
     <textfield :keys="itemname" :outputs="output"></textfield>
-    <label>Category:</label>
+    </div>
+    <div class="field">
+    <label>Category</label>
     <dropdown :data="categories" :keys="itemcategory" :outputs="output"></dropdown>
-    <label>Quantity:</label>
+    </div>
+    <div class="field">
+    <label>Quantity</label>
     <dropdown :data="quantities" :keys="quantity" :outputs="output"></dropdown>
-    <label>Price:</label>
+    </div>
+    <div class="field">
+    <label>Price</label>
     <textfield :keys="price" :outputs="output"></textfield>
-    <label>Currency:</label>
+    </div>
+    <div class="field">
+    <label>Currency</label>
     <dropdown :data="currencies" :keys="currency" :outputs="output"></dropdown>
+    </div>
     <button type="submit" v-on:click="submit = !submit">Submit</button>
     <submitbutton :submit="submit" v-if="submit" :outputs="output"></submitbutton>
   </div>
@@ -46,52 +56,82 @@ export default {
 </script>
 
 <style>
-body{
-  width: 70%;
+body {
   margin: 0 auto;
   text-align: center;
+  background:    url('https://completeprojectresource.com/wp-content/uploads/2018/03/contact-us-form-background.jpg');
+  background-size:     cover;                     
+  background-repeat:   no-repeat;
+  background-position: center center;     
 }
-#form2{
-  padding-left: 10px;
+#form2 {
+  padding-left: 20px;
   display: block;
 }
 
 div > select {
-  width: 178px;
+  width: 260px;
 }
 
 div > h1 {
   padding-left: 20px;
-  margin: 10px auto 0 0;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px auto 20px 0;
 }
 
 label {
   display: block;
-  padding-left: 20px;
+  padding-left: 0px;
   text-align: left;
-  margin: 10px 0 10px;
-}
-
-input, select{
-  margin-left:-60px;
 }
 
 button {
-  display: block;
-  margin: 10px 0 10px 22px;
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  margin: 10px 0 10px 12px;
+  background-color: #7b81ec;
+  border: none;
+  border-radius: 25px;
+  color: black;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-div>p, div>h2 {
-   text-align: left;
-   padding-left: 20px;
+div > p,
+div > h2 {
+  text-align: left;
+  padding-left: 50px;
 }
 
 #formrow2 {
   display: inline-block;
-  margin: 30px auto;
-  width: 300px;
+  margin: 80px auto;
+  width: 330px;
   vertical-align: top;
-  border: 2px solid seagreen;
-  background-color: aquamarine;
+  background: white;
+  border-radius: 10px;
+}
+
+.field{
+  background: white;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+input, select{
+  width: 260px;
+  background-color: transparent;
+  outline: none;
+  outline-style: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid blue 1px;
+  padding: 3px 10px;
 }
 </style>
